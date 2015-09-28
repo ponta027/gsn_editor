@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated model -->
+      <package
+            uri="GSN1"
+            class="GSN1.ModelPackage"
+            genModel="model/gsn.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated gsn -->
+      <package
+            uri="GSN"
+            class="GSN.ModelPackage"
+            genModel="model/gsn.genmodel"/>
+   </extension>
+
+</plugin>
