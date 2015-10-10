@@ -5,7 +5,7 @@
       <metamodel href="GSN#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="Solution" domainClass="GSN.Solution">
-          <style xsi:type="style:DotDescription" showIcon="false" labelExpression="feature:identifier" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
+          <style xsi:type="style:DotDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:identifier" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
@@ -50,7 +50,7 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
           </style>
         </containerMappings>
-        <toolSections>
+        <toolSections name="Container">
           <ownedTools xsi:type="tool:ContainerCreationDescription" name="Goal" containerMappings="//@ownedViewpoints[name='sample']/@ownedRepresentations[name='']/@defaultLayer/@containerMappings[name='Goal']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
@@ -84,6 +84,17 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Solution" label="Solution" nodeMappings="//@ownedViewpoints[name='sample']/@ownedRepresentations[name='']/@defaultLayer/@nodeMappings[name='Solution']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="GSN.Solution" referenceName="contains"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="relation">
           <ownedTools xsi:type="tool:EdgeCreationDescription" name="Contextof" label="Contextof" edgeMappings="//@ownedViewpoints[name='sample']/@ownedRepresentations[name='']/@defaultLayer/@edgeMappings[name='contextof']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
@@ -97,12 +108,16 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Solution" label="Solution" nodeMappings="//@ownedViewpoints[name='sample']/@ownedRepresentations[name='']/@defaultLayer/@nodeMappings[name='Solution']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="SolvedBy" label="SolvedBy" edgeMappings="//@ownedViewpoints[name='sample']/@ownedRepresentations[name='']/@defaultLayer/@edgeMappings[name='SolvedBy']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="GSN.Solution" referenceName="contains"/>
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="GSN.SolvedBy" referenceName="childSolvedBy">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="childSpinalelement" valueExpression="[target/]"/>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
